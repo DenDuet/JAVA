@@ -1,0 +1,16 @@
+дек. 11, 2022 1:05:40 AM calc.Main main
+INFO: Beginning main, init controller
+дек. 11, 2022 1:05:40 AM calc.Main main
+INFO: init controller ViewResult, running...
+дек. 11, 2022 1:05:57 AM calc.views.ViewResult sign
+INFO: False input, try again!
+дек. 11, 2022 1:05:59 AM calc.views.ViewResult sign
+INFO: False input, try again!
+дек. 11, 2022 1:06:01 AM calc.views.ViewResult run
+INFO: begin - controllerRacional
+дек. 11, 2022 1:06:01 AM calc.views.ViewResult run
+INFO: begin - viewRacional
+дек. 11, 2022 1:06:01 AM calc.views.ViewResult viewRacional
+INFO: 65,00 / 95,00 = 0,68
+дек. 11, 2022 1:06:04 AM calc.views.ViewResult run
+INFO: Exit

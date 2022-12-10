@@ -1,31 +1,19 @@
 package calc.controller;
 
-import java.util.Scanner;
-
 import calc.model.Complex;
 import calc.model.Racional;
-import calc.views.ViewResult;
+import java.util.logging.Level;
+
+import calc.Main.Log;
 
 public class Controller {
-    private Complex complex;
-    private Racional racional;
-    private ViewResult viewResult;
+    private Complex complex = new Complex(0, 0);
+    private Racional racional = new Racional();
 
-    public Controller() {
-    }   
 
-    public Controller(Racional racional) {
-        this.racional = racional;
-    }
-
-    public Controller(Complex complex) {
-        this.complex = complex;
-    }
-    public void controllerRacional() { //throws Exception
-        Double result = 0.0;
-        Double n1 = racional.number();
-        Double n2 = racional.number();
-        String sign = sign();
+    public Double controllerRacional(String sign, Double n1, Double n2) { 
+        Double result=0.0;
+        
         switch (sign) {
             case "+":
                 result = racional.sum(n1, n2);
@@ -38,57 +26,47 @@ public class Controller {
                 break;      
             case "/":
                 if (n2!=0) {
-                    result = racional.sub(n1, n2);
-                } else {
-                    System.out.println("Деление на 0!");
-                }
+                    try {
+                        result = racional.div(n1, n2);
+                    } catch (Exception e) {
+                        Log.LOGGER.log(Level.INFO,"Divide by zero! Racional numbers.");
+                        System.out.println(e);
+                     }
+                 }
                 break;      
             default:
                 break;
         }
-        viewResult.viewRacional(sign, n1, n2, result);
-       
-    }
+        return result;        
+    }    
 
-    public void controllerComplex() {
 
-        Complex n1 = new Complex();
-        Complex n2 = new Complex();
-
-        Complex result = new Complex(0.0, 0.0);
-
-        String sign = sign();
+    public Complex controllerComplex(String sign, Complex c1, Complex c2) {
+        Complex resultComplex = new Complex(0.0, 0.0);;
         switch (sign) {
             case "+":
-                result = complex.sum(n1, n2);
+                resultComplex = complex.sum(c1, c2);
                 break;
             case "-":
-                result = complex.sub(n1, n2);
+                resultComplex = complex.sub(c1, c2);
                 break;      
             case "*":
-                result = complex.mul(n1, n2);
+                resultComplex = complex.mul(c1, c2);
                 break;      
             case "/":
-                // if (n2.getImage()!=0 && n2.getReal()!=0) {
-                    result = complex.sub(n1, n2);
-                // } else {
-                    // System.out.println("Деление на 0!");
-                    // return -1000000.0;
-                // }
+
+                try {
+                    resultComplex = complex.div(c1, c2);
+                } catch (Exception e) {
+                    Log.LOGGER.log(Level.INFO,"Divide by zero! Complex numbers.");
+                    e.printStackTrace();
+                }
+
                 break;      
             default:
                 break;
         }
-        viewResult.viewComplex(sign, n1, n2, result);
+        return resultComplex;
     }
-
-    public String sign() {
-        System.out.println("Введите знак действия (+, -, *, /): ");
-        Scanner sc = new Scanner(System.in);
-        String sign = sc.nextLine();
-        return sign;
-    }
-
-
 
 }

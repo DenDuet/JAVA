@@ -7,13 +7,17 @@ import personal.model.User;
 import personal.model.UserMapper;
 
 public class RepositoryFile implements Repository {
-    private UserMapper mapper = new UserMapper();
+    protected UserMapper mapper = new UserMapper();
     private FileOperation fileOperation;
 
     public RepositoryFile(FileOperation fileOperation) {
         this.fileOperation = fileOperation;
     }
-
+    
+    public RepositoryFile(FileOperation fileOperation, UserMapper mapper) {
+        this.fileOperation = fileOperation;
+        this.mapper = mapper;
+    }
     @Override
     public List<User> getAllUsers() {
         List<String> lines = fileOperation.readAllLines();
