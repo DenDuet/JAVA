@@ -6,7 +6,9 @@
 // Хранение по вашему выбору, можно в текстовом файле (или каждая записка в одном файле, как вам удобнее)
 
 import controllers.Controller;
+import controllers.Logger;
 import model.file.FileOperation;
+import model.file.IRepositor;
 import model.file.Repository;
 import model.file.RepositoryFile;
 
@@ -18,8 +20,8 @@ public class Main {
         FileOperation fileOperation = new FileOperation("notes.txt");
         
         Repository repository = new RepositoryFile(fileOperation);
-//        Repository repositoryLog = new IRepositor(repository, new Logger("s.txt"));
-        Controller controller = new Controller(repository);
+        Repository repositoryLog = new IRepositor(repository, new Logger("s.txt"));
+        Controller controller = new Controller(repositoryLog);
         
         View view = new View(controller);
         view.run();
